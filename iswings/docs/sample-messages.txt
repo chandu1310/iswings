@@ -1,0 +1,22 @@
+-- button operations
+click button button-name
+focus button button-name
+
+-- textfield/textarea operations
+select field fieldname
+click field fieldname
+focus field fieldname
+type in fieldname  
+select text in fieldname
+cut 
+copy 
+paste
+
+-- jcombobox operations
+
+-- window operations
+
+
+-- scroller operations
+
+-- checkbox/ radio button operations
