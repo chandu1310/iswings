@@ -1,0 +1,3 @@
+M argument for running desktop application:
+-Djava.rmi.server.codebase=file:${project_path}/bin
+
