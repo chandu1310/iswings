@@ -1,19 +1,28 @@
 package java.iswings.components;
 
+import java.awt.Component;
 import java.iswings.core.CommandShell;
 
 import javax.swing.JButton;
 
-public class IButton extends JButton {
-	private final String id;
+public class IButton extends JButton implements IComponent {
+	private static final long serialVersionUID = -3061113413610535825L;
+	private final String ID;
 	
-	public IButton(String id, String text) {
+	public IButton(String ID, String text) {
 		super(text);
 		CommandShell.getInstance();
-		this.id = id;
+		this.ID = ID;
 	}
 	
-	public final String getID(){
-		return this.id;
+	@Override
+	public Component getComponent() {
+		return this;
+	}
+	
+	@Override
+	public String getID() {
+		// TODO Auto-generated method stub
+		return this.ID;
 	}
 }
