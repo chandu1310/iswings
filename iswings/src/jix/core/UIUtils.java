@@ -1,12 +1,8 @@
-package java.iswings.core;
+package jix.core;
 
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.iswings.components.IComponent;
-import java.iswings.components.IConstants;
-import java.iswings.components.IConstants.EventType;
-import java.iswings.components.IContainer;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -16,6 +12,11 @@ import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
+
+import jix.components.IComponent;
+import jix.components.IConstants;
+import jix.components.IContainer;
+import jix.components.IConstants.EventType;
 
 public class UIUtils {
 

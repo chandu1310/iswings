@@ -1,9 +1,10 @@
-package java.iswings.components;
+package jix.components;
 
 import java.awt.Component;
-import java.iswings.core.CommandShell;
 
 import javax.swing.JButton;
+
+import jix.core.CommandShell;
 
 public class IButton extends JButton implements IComponent {
 	private static final long serialVersionUID = -3061113413610535825L;

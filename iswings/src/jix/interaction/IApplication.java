@@ -1,4 +1,4 @@
-package java.interaction;
+package jix.interaction;
 
 import java.rmi.Remote;
 

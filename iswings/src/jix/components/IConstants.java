@@ -1,4 +1,4 @@
-package java.iswings.components;
+package jix.components;
 
 public class IConstants {
 
