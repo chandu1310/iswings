@@ -2,9 +2,10 @@ package test;
 
 import java.awt.Container;
 import java.awt.FlowLayout;
-import java.iswings.components.IButton;
 
 import javax.swing.JFrame;
+
+import jix.components.IButton;
 
 public class Test1 {
 

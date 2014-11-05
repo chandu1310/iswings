@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.lang.reflect.Method;
 import java.rmi.Naming;
 import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.Calendar;
 
@@ -72,12 +73,14 @@ public class DestinationDesktopApplication extends JFrame implements DesktopAppl
 	}
 
 	public static void main(String args[]) {
-
-		try {
+		try{
+			LocateRegistry.createRegistry(1099);
+		}catch(Exception er){}
+		
+		try {			
 			DestinationDesktopApplication obj = new DestinationDesktopApplication("CHANDU01");
 			DesktopApplicationInterface stub = (DesktopApplicationInterface) UnicastRemoteObject
 					.exportObject(obj, 0);
-
 			Naming.rebind(obj.getAppID(), stub);
 			System.out.println("Desktop application "+obj.getAppID()+" is ready to take commands.");
 		} catch (Exception e) {

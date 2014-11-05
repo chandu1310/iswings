@@ -12,6 +12,9 @@ public class SourceApplication {
 
 		String host = (args.length < 1) ? null : args[0];
 		try {
+			LocateRegistry.createRegistry(1099);
+		}catch(Exception er){}
+		try{
 			Registry registry = LocateRegistry.getRegistry(host);
 			DesktopApplicationInterface stub = (DesktopApplicationInterface) registry.lookup("CHANDU01");
 			String response = stub.sayHello();
