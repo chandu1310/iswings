@@ -1,12 +1,10 @@
-package java.iswings.components;
+package jix.components;
 
 import java.awt.AWTEvent;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowEvent;
-import java.iswings.components.IConstants.CompType;
-import java.iswings.core.UIUtils;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -16,6 +14,9 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+
+import jix.components.IConstants.CompType;
+import jix.core.UIUtils;
 
 public interface IContainer extends IComponent {
 

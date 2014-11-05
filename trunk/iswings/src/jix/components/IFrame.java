@@ -1,4 +1,4 @@
-package java.iswings.components;
+package jix.components;
 
 import java.awt.Component;
 

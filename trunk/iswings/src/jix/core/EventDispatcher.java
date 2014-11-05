@@ -1,4 +1,4 @@
-package java.iswings.core;
+package jix.core;
 
 public class EventDispatcher {
 

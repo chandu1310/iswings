@@ -1,4 +1,4 @@
-package java.interaction;
+package jix.interaction;
 
 public interface ICommandFactory {
 	public ICommandProcessor getCommandProcessor();

@@ -1,7 +1,7 @@
-package java.iswings.core;
+package jix.core;
 
-import java.interaction.ICommand;
-import java.interaction.ICommandProcessor;
+import jix.interaction.ICommand;
+import jix.interaction.ICommandProcessor;
 
 public class VoiceCommandProcessor implements ICommandProcessor {
 	private static final ICommandProcessor classInstance = new VoiceCommandProcessor();

@@ -1,4 +1,4 @@
-package java.iswings.core;
+package jix.core;
 
 import java.net.BindException;
 import java.net.DatagramPacket;

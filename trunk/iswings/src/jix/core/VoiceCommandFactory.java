@@ -1,8 +1,8 @@
-package java.iswings.core;
+package jix.core;
 
-import java.interaction.ICommand;
-import java.interaction.ICommandFactory;
-import java.interaction.ICommandProcessor;
+import jix.interaction.ICommand;
+import jix.interaction.ICommandFactory;
+import jix.interaction.ICommandProcessor;
 
 public class VoiceCommandFactory implements ICommandFactory {
 	@Override
