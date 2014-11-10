@@ -1,14 +1,14 @@
 package jix.components;
 
-import java.awt.AWTEvent;
 import java.awt.Component;
-import java.awt.event.ActionEvent;
-import java.awt.event.MouseEvent;
-import java.awt.event.WindowEvent;
+import java.rmi.Naming;
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -16,9 +16,12 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import jix.components.IConstants.CompType;
+import jix.components.IConstants.EventType;
+import jix.core.JIXMessage;
+import jix.core.JIXRMITarget;
 import jix.core.UIUtils;
 
-public interface IContainer extends IComponent {
+public interface IContainer extends IComponent{
 
 	public Component add(IComponent comp);
 	
@@ -28,25 +31,71 @@ public interface IContainer extends IComponent {
 	
 	public void add(IComponent comp, Object constraints, int index);
 	
-	public class IContainerBase {
+	public class IContainerBase implements JIXRMITarget {
+		private String ID;
 		private Map<IConstants.CompType, List<IComponent>> _typeToComponentsMap;
 		private IComponent _focussedComponent = null;
 
-		public IContainerBase() {
+		public IContainerBase(String ID) {
+			this.ID = ID.toUpperCase();
 			this._typeToComponentsMap = new HashMap<IConstants.CompType, List<IComponent>>();
+			
+			try{
+			JIXRMITarget stub = (JIXRMITarget) UnicastRemoteObject.exportObject(this, 0);
+			Naming.rebind(this.ID, stub);
+			}catch(Exception er){
+				System.err.println("JIX: Unable to bind application window for JIX functionality.");
+				er.printStackTrace();
+			}
 		}
 
+		public String getID() {
+			return this.ID;
+		}
+
+		
+		@Override
+		public String invoke(JIXMessage message) throws RemoteException {
+			IConstants.EventType event = EventType.ACTION;
+			switch (message.getEventType()) {
+			case 0:
+				event = EventType.MOUSE;
+				break;
+			case 1:
+				event = EventType.TEXT;
+				break;
+			case 2:
+				event = EventType.DRAG;
+				break;
+			case 3:
+				event = EventType.WINDOW;
+				break;
+			default:
+				break;
+			}
+			dispatchEvent(message.getID(), event);
+			return null;
+		}
+		
 		public void dispatchEvent(String ID, IConstants.EventType event) {
-
+			Set<IConstants.CompType> compTypes = _typeToComponentsMap.keySet();
+			for(IConstants.CompType ct: compTypes){
+				if(dispatchEvent(ct, ID, event))
+					return;
+			}			
 		}
 
-		public void dispatchEvent(IConstants.CompType compType, String ID,
+		public boolean dispatchEvent(IConstants.CompType compType, String ID,
 				IConstants.EventType event) {
 			IComponent comp = getComponentFromMap(compType, ID);
 			if (comp != null && event != null) {
-				UIUtils.dispatchEvent(comp, event);
-				this._focussedComponent = comp;
+				boolean result = UIUtils.dispatchEvent(comp, event);
+				if(result){
+					this._focussedComponent = comp;
+					return result;
+				}				
 			}
+			return false;
 		}
 
 		private IComponent getComponentFromMap(IConstants.CompType compType,

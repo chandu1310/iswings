@@ -11,9 +11,11 @@ public class IConstants {
 	};
 	
 	public enum EventType {
-		ACTION,
 		MOUSE,
-		WINDOW
+		TEXT,
+		DRAG,
+		WINDOW,
+		ACTION		
 	}
 	
 }

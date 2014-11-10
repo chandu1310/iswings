@@ -1,9 +1,11 @@
-package jix.core;
+package jix.interaction.text;
 
 import java.net.BindException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 /*
  * This class listens to the incoming shell commands and passes it on to the EventDispatcher.
@@ -17,7 +19,9 @@ public class CommandShell implements Runnable {
 
 	private static final CommandShell obj = new CommandShell();
 	private EventDispatcher ed = EventDispatcher.getInstance();
-
+	private Executor exec = Executors.newSingleThreadExecutor();
+	
+	
 	private Thread shellThread = null;
 	private static int serverState = SERVER_NOTSTARTED;
 
@@ -37,20 +41,18 @@ public class CommandShell implements Runnable {
 	public static int edcount = 0;
 
 	private void dispatchToCommandProcessor(final String commandString) {
-		Thread t = new Thread(new Runnable() {
+		exec.execute( new Runnable() {
 			@Override
 			public void run() {
 				ed.processCommand(commandString);
 			}
 		});
-		t.setName("ED Thread" + edcount++);
-		t.start();
 	}
 
-	private void listenAndProcess(DatagramSocket serverSocket) {
-		byte[] receiveData = new byte[MAX_COMMAND_PACKET_SIZE];
+	private void listenAndProcess(DatagramSocket serverSocket) {		
 		while (true) {
 			try {
+				byte[] receiveData = new byte[MAX_COMMAND_PACKET_SIZE];
 				DatagramPacket receivePacket = new DatagramPacket(receiveData,
 						receiveData.length);
 				serverSocket.receive(receivePacket);
@@ -62,8 +64,7 @@ public class CommandShell implements Runnable {
 				// int port = receivePacket.getPort();
 			} catch (Exception e) {
 				serverSocket.close();
-				System.out
-						.println("CommandShell: Exception occured while processing command. Server is going down.");
+				System.err.println("CommandShell: Exception occured while processing command. Server is going down.");
 				serverState = SERVER_FAILED;
 				e.printStackTrace();
 			}
@@ -87,61 +88,21 @@ public class CommandShell implements Runnable {
 		}
 		catch(BindException er){
 			if("Address already in use".equals(er.getMessage())){
-				System.out.println("CommandShell: Server already started.");
+				System.err.println("CommandShell: Server already started.");
 				serverState = SERVER_STARTED;
 			}else{
 				serverState = SERVER_FAILED;
-				System.out.println("CommandShell: Unable to bind the command server to shell port.");
-				er.printStackTrace();
+				System.err.println("CommandShell: Unable to bind the command server to shell port.");				
 			}
 			return;
 		}
 		catch (Exception er) {
 			serverState = SERVER_FAILED;
-			System.out.println("CommandShell: Unable to start the command server.");
-			er.printStackTrace();
+			System.err.println("CommandShell: Unable to start the command server.");
 		}
 	}
-
-	public void processCommand(String commandString) {
-		try {
-			processCommand(InetAddress.getByName("localhost"), SHELL_PORT,
-					commandString);
-		} catch (Exception er) {
-			System.out
-					.println("CommandShell: Unable to fetch InetAddress of localhost.");
-			er.printStackTrace();
-		}
-	}
-
-	public void processCommand(InetAddress inetAddress, int port,
-			String commandString) {
-		// If server is not started, attempt once.
-		if (serverState != SERVER_STARTED) {
-			serverState = SERVER_NOTSTARTED;
-			initialize();
-			while (serverState == SERVER_NOTSTARTED)
-				;
-			if (serverState != SERVER_STARTED) {
-				System.out
-						.println("CommandShell: Failed attempt to start the server. Cannot process command.");
-				return;
-			}
-		}
-
-		try {
-			DatagramSocket clientSocket = new DatagramSocket();
-			byte[] sendData = new byte[1024];
-			sendData = commandString.getBytes();
-			DatagramPacket sendPacket = new DatagramPacket(sendData,
-					sendData.length, inetAddress, port);
-			clientSocket.send(sendPacket);
-			clientSocket.close();
-		} catch (Exception er) {
-			System.out
-					.println("CommandShell: Unable to process command string: "
-							+ commandString);
-			er.printStackTrace();
-		}
+	
+	public static void main(String[] args) {
+		CommandShell.getInstance();
 	}
 }
