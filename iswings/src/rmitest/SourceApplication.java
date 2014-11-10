@@ -11,16 +11,19 @@ public class SourceApplication {
 	public static void main(String[] args) {
 
 		String host = (args.length < 1) ? null : args[0];
-		try {
-			LocateRegistry.createRegistry(1099);
-		}catch(Exception er){}
 		try{
 			Registry registry = LocateRegistry.getRegistry(host);
-			DesktopApplicationInterface stub = (DesktopApplicationInterface) registry.lookup("CHANDU01");
-			String response = stub.sayHello();
-			System.out.println("response: " + response);
-		} catch (Exception e) {
-			System.err.println("Client exception: " + e.toString());
+			DesktopApplicationInterface stub = (DesktopApplicationInterface) registry.lookup("CHANDU02");
+			if(stub!=null){
+				String response = stub.sayHello();
+				System.out.println("response: " + response);
+			}
+		}
+		catch(java.rmi.ConnectException connExec){
+			System.out.println("Target UI is unavailable right now.");
+		}
+		catch (Exception e) {
+			System.out.println("Exception occured.");
 			e.printStackTrace();
 		}
 	}

@@ -20,10 +20,10 @@ import jix.components.IConstants.EventType;
 
 public class UIUtils {
 
-	public synchronized static void dispatchEvent(IComponent comp,
+	public synchronized static boolean dispatchEvent(IComponent comp,
 			IConstants.EventType event) {
 		if (event == EventType.ACTION) {
-			dispatchActionEvent(comp);
+			return dispatchActionEvent(comp);
 		} else if (event == EventType.MOUSE) {
 
 		} else if (event == EventType.WINDOW) {
@@ -31,9 +31,10 @@ public class UIUtils {
 
 			}
 		}
+		return false;
 	}
 
-	private synchronized static void dispatchActionEvent(IComponent comp) {
+	private synchronized static boolean dispatchActionEvent(IComponent comp) {
 		ActionEvent event = null;
 		Component co = comp.getComponent();
 		ActionListener[] listeners = null;
@@ -58,8 +59,9 @@ public class UIUtils {
 		}
 		
 		
-		if (event == null || listeners == null || listeners.length == 0)
-			return;
+		if (event == null || listeners == null || listeners.length == 0){
+			return false;
+		}
 
 		final ActionEvent ae = event;
 		
@@ -71,5 +73,6 @@ public class UIUtils {
 				}
 			});
 		}
+		return true;
 	}
 }

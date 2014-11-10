@@ -73,12 +73,8 @@ public class DestinationDesktopApplication extends JFrame implements DesktopAppl
 	}
 
 	public static void main(String args[]) {
-		try{
-			LocateRegistry.createRegistry(1099);
-		}catch(Exception er){}
-		
 		try {			
-			DestinationDesktopApplication obj = new DestinationDesktopApplication("CHANDU01");
+			DestinationDesktopApplication obj = new DestinationDesktopApplication("CHANDU02");
 			DesktopApplicationInterface stub = (DesktopApplicationInterface) UnicastRemoteObject
 					.exportObject(obj, 0);
 			Naming.rebind(obj.getAppID(), stub);
