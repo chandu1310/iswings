@@ -6,6 +6,7 @@ import javax.swing.ImageIcon;
 
 public interface UIConstants {
 	public static int ICON_WIDTH = 48, ICON_HEIGHT = 48;
+	public static String APP_TITLE = "Atlantis - Portware Launcher";
 	public static String BASE_DIR = "resources/images/skins/basic/";
 	public static Image START_ALL = new ImageIcon(BASE_DIR+"10.png").getImage().getScaledInstance(ICON_WIDTH, ICON_HEIGHT, Image.SCALE_SMOOTH);
 	public static Image STARTING_ALL = new ImageIcon(BASE_DIR+"11.gif").getImage();
