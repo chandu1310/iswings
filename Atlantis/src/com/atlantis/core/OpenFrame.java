@@ -19,6 +19,7 @@ import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
 public final class OpenFrame extends JFrame {
+	private static final long serialVersionUID = 1L;
 	private int _posX = 0, _posY = 0;
 	private InnerPane newContentPane = new InnerPane();
 
@@ -56,9 +57,16 @@ public final class OpenFrame extends JFrame {
 		newContentPane.positionMinimizeButton();
 	}
 
+	@Override
+	public void setVisible(boolean b) {
+		super.setVisible(b);
+		validate();
+	}
+	
 	private class InnerPane extends JPanel {
+		private static final long serialVersionUID = 1L;
 		private int ICON_WIDTH = 20, ICON_HEIGHT = 20;
-		private Icon MINIMIZE_ICON = new ImageIcon("resources/images/min.png");
+		private Icon MINIMIZE_ICON = new ImageIcon("resources/images/base/min.png");
 		private JLayeredPane layeredPane = new JLayeredPane();
 		private JPanel contentPane = new JPanel();
 		private JButton minimizeLabel = createMinimizeButton();
