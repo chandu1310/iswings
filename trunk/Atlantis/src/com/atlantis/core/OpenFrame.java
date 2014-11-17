@@ -24,7 +24,7 @@ public final class OpenFrame extends JFrame {
 	private InnerPane newContentPane = new InnerPane();
 
 	public OpenFrame(String title) {
-		super();
+		super(title);
 		setName(title);
 		setUndecorated(true);
 		newContentPane.setOpaque(true);
