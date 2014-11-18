@@ -20,7 +20,7 @@ public class FileUtil {
 	public static String getAppServerLog() {
 		String path = Config.APPSERVER_LOG_DIR;
 		Calendar cal = Calendar.getInstance();
-		DateFormat df2 = new SimpleDateFormat("yyMMMddHH");
+		DateFormat df2 = new SimpleDateFormat(CONSTANTS.APPSERVERDF);
 		String fileNamePrefix = "AS" + df2.format(cal.getTime());
 		String value= getFile(path, fileNamePrefix, CONSTANTS.LogSuffix);
 		return value;
@@ -30,7 +30,7 @@ public class FileUtil {
 		String path = Config.APPSERVER_LOG_DIR;
 
 		Calendar cal = Calendar.getInstance();
-		DateFormat df2 = new SimpleDateFormat("yyMMMddHH");
+		DateFormat df2 = new SimpleDateFormat(CONSTANTS.APPSERVERDF);
 		String fileNamePrefix = "AS" + df2.format(cal.getTime());
 		return getFile(path, fileNamePrefix, CONSTANTS.ErrSuffix);
 	}
@@ -39,7 +39,7 @@ public class FileUtil {
 		String path = Config.APPSERVER_LOG_DIR;
 
 		Calendar cal = Calendar.getInstance();
-		DateFormat df2 = new SimpleDateFormat("yyMMMddHH");
+		DateFormat df2 = new SimpleDateFormat(CONSTANTS.APPSERVERDF);
 		String fileNamePrefix = "AS" + df2.format(cal.getTime());
 		return getFile(path, fileNamePrefix, CONSTANTS.OutSuffix);
 	}
@@ -48,7 +48,7 @@ public class FileUtil {
 		String path = Config.TRADEMONITOR_LOG_DIR;
 
 		Calendar cal = Calendar.getInstance();
-		DateFormat df2 = new SimpleDateFormat("yyMMMddHH");
+		DateFormat df2 = new SimpleDateFormat(CONSTANTS.TRADEMONITORDF);
 		String fileNamePrefix = "TM" + df2.format(cal.getTime());
 		return getFile(path, fileNamePrefix, CONSTANTS.LogSuffix);
 	}
@@ -57,7 +57,7 @@ public class FileUtil {
 		String path = Config.TRADEMONITOR_LOG_DIR;
 
 		Calendar cal = Calendar.getInstance();
-		DateFormat df2 = new SimpleDateFormat("yyMMMddHH");
+		DateFormat df2 = new SimpleDateFormat(CONSTANTS.TRADEMONITORDF);
 		String fileNamePrefix = "TM" + df2.format(cal.getTime());
 		return getFile(path, fileNamePrefix, CONSTANTS.ErrSuffix);
 	}
@@ -66,7 +66,7 @@ public class FileUtil {
 		String path = Config.TRADEMONITOR_LOG_DIR;
 
 		Calendar cal = Calendar.getInstance();
-		DateFormat df2 = new SimpleDateFormat("yyMMMddHH");
+		DateFormat df2 = new SimpleDateFormat(CONSTANTS.TRADEMONITORDF);
 		String fileNamePrefix = "TM" + df2.format(cal.getTime());
 		return getFile(path, fileNamePrefix, CONSTANTS.OutSuffix);
 	}
@@ -75,7 +75,7 @@ public class FileUtil {
 		String path = Config.BASKETSERVER_LOG_DIR;
 
 		Calendar cal = Calendar.getInstance();
-		DateFormat df2 = new SimpleDateFormat("yyMMMddHH");
+		DateFormat df2 = new SimpleDateFormat(CONSTANTS.BASKERSERVERDF);
 		String fileNamePrefix = "BS" + df2.format(cal.getTime());
 		return getFile(path, fileNamePrefix, CONSTANTS.LogSuffix);
 	}
@@ -84,7 +84,7 @@ public class FileUtil {
 		String path = Config.BASKETSERVER_LOG_DIR;
 
 		Calendar cal = Calendar.getInstance();
-		DateFormat df2 = new SimpleDateFormat("yyMMMddHH");
+		DateFormat df2 = new SimpleDateFormat(CONSTANTS.BASKERSERVERDF);
 		String fileNamePrefix = "BS" + df2.format(cal.getTime());
 		return getFile(path, fileNamePrefix, CONSTANTS.ErrSuffix);
 	}
@@ -93,7 +93,7 @@ public class FileUtil {
 		String path = Config.BASKETSERVER_LOG_DIR;
 
 		Calendar cal = Calendar.getInstance();
-		DateFormat df2 = new SimpleDateFormat("yyMMMddHH");
+		DateFormat df2 = new SimpleDateFormat(CONSTANTS.BASKERSERVERDF);
 		String fileNamePrefix = "BS" + df2.format(cal.getTime());
 		return getFile(path, fileNamePrefix, CONSTANTS.OutSuffix);
 	}
