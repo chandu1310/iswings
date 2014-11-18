@@ -16,12 +16,15 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
-import com.atlantis.AppWindow;
+import com.atlantis.AtlantisContext;
+import com.atlantis.core.CardsPanel;
+import com.atlantis.model.ModelConstants.ServerStatus;
 
 public class GUIMediator {
 	private GUIMediator(){};
@@ -39,8 +42,13 @@ public class GUIMediator {
 
 	private JCheckBox includeTM, includeAS, includeBS;
 
+	private CardsPanel cards;
+	
 	private final Color ON_ENTER = Color.ORANGE, ON_EXIT = Color.WHITE, ON_PRESSED = Color.WHITE, ON_RELEASE = Color.ORANGE;
 	
+	public void registerCardsPanel(CardsPanel cards){
+		this.cards = cards;
+	}
 	
 	public void registerAboutItem(MenuItem aboutItem){
 		this.aboutItem = aboutItem;
@@ -232,7 +240,7 @@ public class GUIMediator {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				super.mouseClicked(e);
-				System.out.println("Clicked");
+				cards.toggleCard(UIConstants.TM_CARD);
 			}
 			
 			@Override
@@ -270,7 +278,7 @@ public class GUIMediator {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				super.mouseClicked(e);
-				System.out.println("Clicked");
+				cards.toggleCard(UIConstants.AS_CARD);
 			}
 			
 			@Override
@@ -308,7 +316,7 @@ public class GUIMediator {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				super.mouseClicked(e);
-				System.out.println("Clicked");
+				cards.toggleCard(UIConstants.BS_CARD);
 			}
 			
 			@Override
@@ -338,5 +346,69 @@ public class GUIMediator {
 
 	public void registerIncludeBS(JCheckBox includeBS) {
 		this.includeBS = includeBS;
+	}
+	
+	
+	//Data binding
+	public void refreshTradeMonitorStatus(){
+		
+	}
+	
+	public void refreshBasketServerStatus(){
+		
+	}
+	
+	public void refreshAppServerStatus(){
+		
+	}
+	
+	public void refreshServerStatus(){
+		refreshTradeMonitorStatus();
+		refreshAppServerStatus();
+		refreshTradeMonitorStatus();
 	}	
+	
+	public void refreshAll(){
+		refreshAll();
+
+		int result = 0; // System Down
+		
+		if(AtlantisContext.TM_INFO.getStatus()==ServerStatus.SERVER_UP 
+				&& AtlantisContext.AS_INFO.getStatus()==ServerStatus.SERVER_UP
+				&& AtlantisContext.BS_INFO.getStatus()==ServerStatus.SERVER_UP){
+			result = 1; // success
+		}else if(AtlantisContext.TM_INFO.getStatus()==ServerStatus.SERVER_FAILED 
+				|| AtlantisContext.AS_INFO.getStatus()==ServerStatus.SERVER_FAILED
+				|| AtlantisContext.BS_INFO.getStatus()==ServerStatus.SERVER_FAILED){
+			result = -1; //failed
+		}else if(AtlantisContext.TM_INFO.getStatus()==ServerStatus.SERVER_STARTING 
+				|| AtlantisContext.AS_INFO.getStatus()==ServerStatus.SERVER_STARTING
+				|| AtlantisContext.BS_INFO.getStatus()==ServerStatus.SERVER_STARTING){
+			result = 2; //Still starting
+		}
+			
+		switch (result) {
+		case 1:
+			//successfully started all modules
+			startAllLbl.setIcon(new ImageIcon(UIConstants.STARTED_ALL));
+			break;
+		case 2:			
+			// modules are starting up
+			startAllLbl.setIcon(new ImageIcon(UIConstants.STARTING_ALL));
+			break;
+		case -1:			
+			// One or more modules didnot start.
+			startAllLbl.setIcon(new ImageIcon(UIConstants.FAILED_TO_START_ALL));
+			break;
+		case 0:			
+			// All or some of the modules are down.
+			startAllLbl.setIcon(new ImageIcon(UIConstants.START_ALL));
+			break;
+		default:
+			//default state
+			startAllLbl.setIcon(new ImageIcon(UIConstants.START_ALL));
+			break;
+		}
+		//refresh main controls.
+	}
 }

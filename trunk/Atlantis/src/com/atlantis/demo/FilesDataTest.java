@@ -1,6 +1,6 @@
 package com.atlantis.demo;
 
-import com.atlantis.core.AtlantisContext;
+import com.atlantis.AtlantisContext;
 import com.atlantis.util.FileUtil;
 
 public class FilesDataTest {

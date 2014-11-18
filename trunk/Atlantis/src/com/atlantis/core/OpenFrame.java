@@ -65,8 +65,8 @@ public final class OpenFrame extends JFrame {
 	
 	private class InnerPane extends JPanel {
 		private static final long serialVersionUID = 1L;
-		private int ICON_WIDTH = 20, ICON_HEIGHT = 20;
-		private Icon MINIMIZE_ICON = new ImageIcon("resources/images/base/min.png");
+		private int ICON_WIDTH = 11, ICON_HEIGHT = 11;
+		private Icon MINIMIZE_ICON = new ImageIcon("resources/images/base/minimize.gif");
 		private JLayeredPane layeredPane = new JLayeredPane();
 		private JPanel contentPane = new JPanel();
 		private JButton minimizeLabel = createMinimizeButton();
@@ -87,7 +87,7 @@ public final class OpenFrame extends JFrame {
 			contentPane.setBounds(0, 0, getParent().getWidth(), getParent()
 					.getHeight());
 
-			minimizeLabel.setBounds(getParent().getWidth() - ICON_WIDTH, 0,
+			minimizeLabel.setBounds(getParent().getWidth() - ICON_WIDTH - 2, 2,
 					ICON_WIDTH, ICON_HEIGHT);
 		}
 
