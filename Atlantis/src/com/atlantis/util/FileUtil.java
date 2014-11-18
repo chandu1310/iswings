@@ -12,17 +12,17 @@ import java.util.Calendar;
 import java.util.Comparator;
 import java.util.Scanner;
 
-import com.atlantis.core.AtlantisContext;
-import com.atlantis.model.CONSTANTS;
+import com.atlantis.AtlantisContext;
 import com.atlantis.model.Config;
+import com.atlantis.model.ModelConstants;
 
 public class FileUtil {
 	public static String getAppServerLog() {
 		String path = Config.APPSERVER_LOG_DIR;
 		Calendar cal = Calendar.getInstance();
-		DateFormat df2 = new SimpleDateFormat(CONSTANTS.APPSERVERDF);
+		DateFormat df2 = new SimpleDateFormat(ModelConstants.APPSERVERDF);
 		String fileNamePrefix = "AS" + df2.format(cal.getTime());
-		String value= getFile(path, fileNamePrefix, CONSTANTS.LogSuffix);
+		String value= getFile(path, fileNamePrefix, ModelConstants.LogSuffix);
 		return value;
 	}
 
@@ -30,72 +30,72 @@ public class FileUtil {
 		String path = Config.APPSERVER_LOG_DIR;
 
 		Calendar cal = Calendar.getInstance();
-		DateFormat df2 = new SimpleDateFormat(CONSTANTS.APPSERVERDF);
+		DateFormat df2 = new SimpleDateFormat(ModelConstants.APPSERVERDF);
 		String fileNamePrefix = "AS" + df2.format(cal.getTime());
-		return getFile(path, fileNamePrefix, CONSTANTS.ErrSuffix);
+		return getFile(path, fileNamePrefix, ModelConstants.ErrSuffix);
 	}
 
 	public static String getAppServerOut() {
 		String path = Config.APPSERVER_LOG_DIR;
 
 		Calendar cal = Calendar.getInstance();
-		DateFormat df2 = new SimpleDateFormat(CONSTANTS.APPSERVERDF);
+		DateFormat df2 = new SimpleDateFormat(ModelConstants.APPSERVERDF);
 		String fileNamePrefix = "AS" + df2.format(cal.getTime());
-		return getFile(path, fileNamePrefix, CONSTANTS.OutSuffix);
+		return getFile(path, fileNamePrefix, ModelConstants.OutSuffix);
 	}
 
 	public static String getTradeMonitorLog() {
 		String path = Config.TRADEMONITOR_LOG_DIR;
 
 		Calendar cal = Calendar.getInstance();
-		DateFormat df2 = new SimpleDateFormat(CONSTANTS.TRADEMONITORDF);
+		DateFormat df2 = new SimpleDateFormat(ModelConstants.TRADEMONITORDF);
 		String fileNamePrefix = "TM" + df2.format(cal.getTime());
-		return getFile(path, fileNamePrefix, CONSTANTS.LogSuffix);
+		return getFile(path, fileNamePrefix, ModelConstants.LogSuffix);
 	}
 
 	public static String getTradeMonitorErr() {
 		String path = Config.TRADEMONITOR_LOG_DIR;
 
 		Calendar cal = Calendar.getInstance();
-		DateFormat df2 = new SimpleDateFormat(CONSTANTS.TRADEMONITORDF);
+		DateFormat df2 = new SimpleDateFormat(ModelConstants.TRADEMONITORDF);
 		String fileNamePrefix = "TM" + df2.format(cal.getTime());
-		return getFile(path, fileNamePrefix, CONSTANTS.ErrSuffix);
+		return getFile(path, fileNamePrefix, ModelConstants.ErrSuffix);
 	}
 
 	public static String getTradeMonitorOut() {
 		String path = Config.TRADEMONITOR_LOG_DIR;
 
 		Calendar cal = Calendar.getInstance();
-		DateFormat df2 = new SimpleDateFormat(CONSTANTS.TRADEMONITORDF);
+		DateFormat df2 = new SimpleDateFormat(ModelConstants.TRADEMONITORDF);
 		String fileNamePrefix = "TM" + df2.format(cal.getTime());
-		return getFile(path, fileNamePrefix, CONSTANTS.OutSuffix);
+		return getFile(path, fileNamePrefix, ModelConstants.OutSuffix);
 	}
 
 	public static String getBasketServerLog() {
 		String path = Config.BASKETSERVER_LOG_DIR;
 
 		Calendar cal = Calendar.getInstance();
-		DateFormat df2 = new SimpleDateFormat(CONSTANTS.BASKERSERVERDF);
+		DateFormat df2 = new SimpleDateFormat(ModelConstants.BASKERSERVERDF);
 		String fileNamePrefix = "BS" + df2.format(cal.getTime());
-		return getFile(path, fileNamePrefix, CONSTANTS.LogSuffix);
+		return getFile(path, fileNamePrefix, ModelConstants.LogSuffix);
 	}
 
 	public static String getBasketServerErr() {
 		String path = Config.BASKETSERVER_LOG_DIR;
 
 		Calendar cal = Calendar.getInstance();
-		DateFormat df2 = new SimpleDateFormat(CONSTANTS.BASKERSERVERDF);
+		DateFormat df2 = new SimpleDateFormat(ModelConstants.BASKERSERVERDF);
 		String fileNamePrefix = "BS" + df2.format(cal.getTime());
-		return getFile(path, fileNamePrefix, CONSTANTS.ErrSuffix);
+		return getFile(path, fileNamePrefix, ModelConstants.ErrSuffix);
 	}
 
 	public static String getBasketServerOut() {
 		String path = Config.BASKETSERVER_LOG_DIR;
 
 		Calendar cal = Calendar.getInstance();
-		DateFormat df2 = new SimpleDateFormat(CONSTANTS.BASKERSERVERDF);
+		DateFormat df2 = new SimpleDateFormat(ModelConstants.BASKERSERVERDF);
 		String fileNamePrefix = "BS" + df2.format(cal.getTime());
-		return getFile(path, fileNamePrefix, CONSTANTS.OutSuffix);
+		return getFile(path, fileNamePrefix, ModelConstants.OutSuffix);
 	}
 
 	private static String getFile(String path, String fileNamePrefix,

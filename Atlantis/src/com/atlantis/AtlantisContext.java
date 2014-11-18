@@ -1,8 +1,16 @@
-package com.atlantis.core;
+package com.atlantis;
+
+import com.atlantis.model.AppServerInfoBean;
+import com.atlantis.model.BasketServerInfoBean;
+import com.atlantis.model.TradeMonitorInfoBean;
 
 public class AtlantisContext {
 	private static AtlantisContext _context;
 
+	public static final TradeMonitorInfoBean TM_INFO = TradeMonitorInfoBean.getInstance();
+	public static final AppServerInfoBean AS_INFO = AppServerInfoBean.getInstance();
+	public static final BasketServerInfoBean BS_INFO = BasketServerInfoBean.getInstance();
+	
 	private String appServerSTime;
 	//private String appServerETime;
 	private String tradeMonitorSTime;

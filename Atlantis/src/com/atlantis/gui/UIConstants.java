@@ -17,5 +17,9 @@ public interface UIConstants {
 	public static Image MODULE_DOWN = new ImageIcon(BASE_DIR+"40.png").getImage().getScaledInstance(ICON_WIDTH, ICON_HEIGHT, Image.SCALE_SMOOTH);
 	public static Image MODULE_STARTING = new ImageIcon(BASE_DIR+"41.gif").getImage();
 	public static Image MODULE_FAILED_TO_START = new ImageIcon(BASE_DIR+"42.gif").getImage();
-	public static Image MODULE_UP = new ImageIcon(BASE_DIR+"43.png").getImage().getScaledInstance(ICON_WIDTH, ICON_HEIGHT, Image.SCALE_SMOOTH);	
+	public static Image MODULE_UP = new ImageIcon(BASE_DIR+"43.png").getImage().getScaledInstance(ICON_WIDTH, ICON_HEIGHT, Image.SCALE_SMOOTH);
+	
+	public static String TM_CARD = "Trade Monitor";
+	public static String AS_CARD = "App Server";
+	public static String BS_CARD = "Basket Server";	
 }
